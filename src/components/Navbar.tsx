@@ -41,7 +41,7 @@ export function Navbar() {
         </div>
 
         <div className="block sm:hiidden">
-          <FaBars size={16} s />
+          <FaBars size={16} />
         </div>
       </div>
     </nav>

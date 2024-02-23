@@ -3,7 +3,7 @@ import minhaSky from "../assets/minha-sky.svg";
 import buttonGooglePlayLightDefault from "../assets/button-google-play-light-default.svg";
 import buttonAppleStoreLightDefault from "../assets/button-apple-store-light-default.svg";
 import skyLightDefault from "../assets/sky-light-default.svg";
-import Accordion from "./Accordion.js";
+import { Accordion } from "./Accordion.js";
 
 export function Footer() {
   return (

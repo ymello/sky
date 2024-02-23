@@ -1,33 +1,51 @@
 import { useQuery } from "react-query";
-import axiosInstance from "./utils/axiosInstance.js";
-import "./App.css";
-
-const fetchPopularMovies = async () => {
-  const response = await axiosInstance.get("/movie/popular");
-  return response.data.results;
-};
+import { FeaturedRow } from "./components/FeaturedRow.js";
+import { Footer } from "./components/Footer.js";
+import { Navbar } from "./components/Navbar.js";
+import { Row } from "./components/Row.js";
+import {
+  fetchHorrorMovies,
+  fetchBrazilianMovies,
+  fetchDCComicsMovies,
+  fetchMarvelMovies,
+  fetchPopularMovies,
+} from "./service/movies.js";
 
 export default function App() {
-  const {
-    data: movies,
-    isLoading,
-    isError,
-  } = useQuery("movieData", fetchPopularMovies);
+  const { data: horrorMovies } = useQuery("horrorMovies", fetchHorrorMovies);
+  const { data: brazilianMovies } = useQuery(
+    "brazilianMovies",
+    fetchBrazilianMovies
+  );
+  const { data: dcComicsMovies } = useQuery(
+    "dcComicsMovies",
+    fetchDCComicsMovies
+  );
+  const { data: marvelMovies } = useQuery("marvelMovies", fetchMarvelMovies);
 
-  if (isLoading) return <div>Loading...</div>;
-  if (isError) return <div>Error fetching data</div>;
-  if (movies) {
-    console.log(movies.results);
-  }
+  const { data: PopularMovies } = useQuery("movieData", fetchPopularMovies);
 
   return (
-    <div>
-      <h1>Popular Movies</h1>
-      <ul>
-        {movies.results.map((movie: any) => (
-          <li key={movie.id}>{movie.title}</li>
-        ))}
-      </ul>
-    </div>
+    <>
+      <Navbar />
+      {PopularMovies && (
+        <FeaturedRow rowId="0" title="Up Coming" movies={PopularMovies} />
+      )}
+
+      <div className="container py-8">
+        {horrorMovies && (
+          <Row rowId="1" title="Os mais temidos" movies={horrorMovies} />
+        )}
+        {brazilianMovies && (
+          <Row rowId="2" title="Coletania nacional" movies={brazilianMovies} />
+        )}
+        {dcComicsMovies && (
+          <Row rowId="3" title="DC comics" movies={dcComicsMovies} />
+        )}
+        {marvelMovies && <Row rowId="4" title="Marvel" movies={marvelMovies} />}
+      </div>
+
+      <Footer />
+    </>
   );
 }

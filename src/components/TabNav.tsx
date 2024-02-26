@@ -46,7 +46,7 @@ export function TabNav() {
     if (allDataLoaded) {
       const delay = setTimeout(() => {
         setAllDataLoadedFlag(true);
-      }, 1000);
+      }, 2000);
 
       return () => clearTimeout(delay);
     }

@@ -32,7 +32,7 @@ export function Navbar() {
           </div>
         </div>
 
-        <div className="hidden sm:flex items-center gap-4">
+        <div className="hidden lg:flex items-center gap-4">
           <div className="flex items-center gap-1">
             <FaUser size={16} />
             <p className="font-bold text-[#00000099]">Entrar</p>
@@ -40,7 +40,7 @@ export function Navbar() {
           <FaSearch size={16} />
         </div>
 
-        <div className="block sm:hiidden">
+        <div className="block lg:hidden">
           <FaBars size={16} />
         </div>
       </div>

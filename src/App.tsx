@@ -25,6 +25,8 @@ export default function App() {
 
   const { data: PopularMovies } = useQuery("movieData", fetchPopularMovies);
 
+  console.log(">>>", PopularMovies);
+
   return (
     <>
       <Navbar />
@@ -32,7 +34,7 @@ export default function App() {
         <FeaturedRow rowId="0" title="Up Coming" movies={PopularMovies} />
       )}
 
-      <div className="container py-8">
+      <div className="container py-8 space-y-8">
         {horrorMovies && (
           <Row rowId="1" title="Os mais temidos" movies={horrorMovies} />
         )}

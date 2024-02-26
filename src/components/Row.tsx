@@ -1,13 +1,11 @@
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
-import { Movie } from "./Movie.js";
+import { MovieModal } from "./MovieModal.js";
 
 interface RowProps {
   title: string;
   rowId: string;
   movies: [];
 }
-
-const baseImageUrl = "https://image.tmdb.org/t/p/w500";
 
 export function Row({ title, rowId, movies }: RowProps) {
   const slideLeft = () => {
@@ -19,9 +17,10 @@ export function Row({ title, rowId, movies }: RowProps) {
     let slider = document.getElementById("slider" + rowId);
     if (slider) slider.scrollLeft = slider.scrollLeft + 500;
   };
+
   return (
-    <>
-      <h2 className="text-black font-bold md:text-xl mb-4">{title}</h2>
+    <div>
+      <h2 className="text-black font-bold md:text-xl mb-2">{title}</h2>
       <div className="relative flex items-center group">
         <MdChevronLeft
           onClick={slideLeft}
@@ -32,17 +31,11 @@ export function Row({ title, rowId, movies }: RowProps) {
           id={"slider" + rowId}
           className="w-full h-full overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide relative"
         >
-          {movies.map((movie, i) => (
-            <>
-              {movie.poster_path && (
-                <Movie
-                  src={`${baseImageUrl}${movie.poster_path}`}
-                  alt={movie.title}
-                  key={i}
-                />
-              )}
-            </>
-          ))}
+          <div className="w-[112px] sm:w-[139px] md:w-[200px] lg:w-[200px]  cursor-pointer relative p-2 flex gap-4">
+            {movies.map((movie, i) => (
+              <MovieModal movie={movie} />
+            ))}
+          </div>
         </div>
 
         <MdChevronRight
@@ -51,6 +44,6 @@ export function Row({ title, rowId, movies }: RowProps) {
           className="bg-white -right-3 rounded-full absolute opacity-50 hover:opacity-100 cursor-pointer z-10 hidden group-hover:block"
         />
       </div>
-    </>
+    </div>
   );
 }

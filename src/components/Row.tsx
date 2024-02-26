@@ -33,7 +33,7 @@ export function Row({ title, rowId, movies }: RowProps) {
         >
           <div className="w-[112px] sm:w-[139px] md:w-[200px] lg:w-[200px]  cursor-pointer relative p-2 flex gap-4">
             {movies.map((movie, i) => (
-              <MovieModal movie={movie} />
+              <MovieModal movie={movie} key={i} />
             ))}
           </div>
         </div>

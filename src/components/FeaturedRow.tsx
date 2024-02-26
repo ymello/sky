@@ -1,6 +1,5 @@
 import { MdChevronLeft, MdChevronRight } from "react-icons/md";
-import { FeaturedMovie } from "./FeaturedMovie.js";
-import { Movie } from "./Movie.js";
+import { FeaturedMovieModal } from "./FeaturedMovieModal.js";
 
 interface FeaturedRowProps {
   title: string;
@@ -8,9 +7,7 @@ interface FeaturedRowProps {
   movies: [];
 }
 
-const baseImageUrl = "https://image.tmdb.org/t/p/w780";
-
-export function FeaturedRow({ title, rowId, movies }: FeaturedRowProps) {
+export function FeaturedRow({ rowId, movies }: FeaturedRowProps) {
   const slideLeft = () => {
     let slider = document.getElementById("slider" + rowId);
     if (slider) slider.scrollLeft = slider.scrollLeft - 500;
@@ -32,17 +29,11 @@ export function FeaturedRow({ title, rowId, movies }: FeaturedRowProps) {
           id={"slider" + rowId}
           className="w-full h-full overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide relative"
         >
-          {movies.map((movie, i) => (
-            <>
-              {movie.backdrop_path && (
-                <FeaturedMovie
-                  src={`${baseImageUrl}${movie.backdrop_path}`}
-                  alt={movie.title}
-                  key={i}
-                />
-              )}
-            </>
-          ))}
+          <div className="w-[289px] sm:w-[289px] md:w-[512px] lg:w-[695px] inline-block cursor-pointer relative p-2">
+            {movies.map((movie, i) => (
+              <FeaturedMovieModal key={i} movie={movie} />
+            ))}
+          </div>
         </div>
 
         <MdChevronRight

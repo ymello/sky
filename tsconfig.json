@@ -19,11 +19,6 @@
     "incremental": true,
     "baseUrl": ".",
     "types": ["node"],
-    "plugins": [
-      {
-        "name": "next"
-      }
-    ]
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "**/*.mjs", "jest.config.js"],
   "exclude": ["node_modules"]

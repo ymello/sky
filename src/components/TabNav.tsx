@@ -11,29 +11,49 @@ import {
 import { FeaturedRow } from "./FeaturedRow.js";
 import { Row } from "./Row.js";
 import { Loading } from "./Loading.js";
+import { useEffect, useState } from "react";
 
 export function TabNav() {
-  const { data: horrorMovies, isLoading: horrorLoad } = useQuery("horrorMovies", fetchHorrorMovies);
-  const { data: brazilianMovies, isLoading: brazilLoad } = useQuery(
-    "brazilianMovies",
-    fetchBrazilianMovies
+  const [allDataLoadedFlag, setAllDataLoadedFlag] = useState(false);
+
+  const { data: horrorMovies, isLoading: isLoadingHorrorMovies } = useQuery(
+    "horrorMovies",
+    fetchHorrorMovies
   );
-  const { data: dcComicsMovies, isLoading: dcLoad } = useQuery(
+  const { data: brazilianMovies, isLoading: isLoadingBrazilianMovies } =
+    useQuery("brazilianMovies", fetchBrazilianMovies);
+  const { data: dcComicsMovies, isLoading: isLoadingDCComicsMovies } = useQuery(
     "dcComicsMovies",
     fetchDCComicsMovies
   );
-  const { data: marvelMovies, isLoading: MarvelLoad } = useQuery(
+  const { data: marvelMovies, isLoading: isLoadingMarvelMovies } = useQuery(
     "marvelMovies",
     fetchMarvelMovies
   );
-
-  const { data: PopularMovies, isLoading: movieDataLoad } = useQuery(
-    "movieData",
+  const { data: PopularMovies, isLoading: isLoadingPopularMovies } = useQuery(
+    "PopularMovies",
     fetchPopularMovies
   );
 
-  if (horrorLoad && dcLoad && brazilLoad && MarvelLoad && movieDataLoad) {
-     return <Loading />;
+  const allDataLoaded =
+    !isLoadingHorrorMovies &&
+    !isLoadingBrazilianMovies &&
+    !isLoadingDCComicsMovies &&
+    !isLoadingMarvelMovies &&
+    !isLoadingPopularMovies;
+
+  useEffect(() => {
+    if (allDataLoaded) {
+      const delay = setTimeout(() => {
+        setAllDataLoadedFlag(true);
+      }, 1000);
+
+      return () => clearTimeout(delay);
+    }
+  }, [allDataLoaded]);
+
+  if (!allDataLoadedFlag) {
+    return <Loading />;
   }
 
   return (

@@ -3,6 +3,7 @@ import { FeaturedRow } from "./components/FeaturedRow.js";
 import { Footer } from "./components/Footer.js";
 import { Navbar } from "./components/Navbar.js";
 import { Row } from "./components/Row.js";
+import { TabNav } from "./components/TabNav.js";
 import {
   fetchHorrorMovies,
   fetchBrazilianMovies,
@@ -25,16 +26,15 @@ export default function App() {
 
   const { data: PopularMovies } = useQuery("movieData", fetchPopularMovies);
 
-  console.log(">>>", PopularMovies);
-
   return (
     <>
       <Navbar />
-      {PopularMovies && (
+      <TabNav />
+      {/* {PopularMovies && (
         <FeaturedRow rowId="0" title="Up Coming" movies={PopularMovies} />
-      )}
+      )} */}
 
-      <div className="container py-8 space-y-8">
+      {/* <div className="container py-8 space-y-8">
         {horrorMovies && (
           <Row rowId="1" title="Os mais temidos" movies={horrorMovies} />
         )}
@@ -45,7 +45,7 @@ export default function App() {
           <Row rowId="3" title="DC comics" movies={dcComicsMovies} />
         )}
         {marvelMovies && <Row rowId="4" title="Marvel" movies={marvelMovies} />}
-      </div>
+      </div> */}
 
       <Footer />
     </>

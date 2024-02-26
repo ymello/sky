@@ -4,10 +4,10 @@ import { TabNav } from "./components/TabNav.js";
 
 export default function App() {
   return (
-    <>
+    <div>
       <Navbar />
       <TabNav />
       <Footer />
-    </>
+    </div>
   );
 }
